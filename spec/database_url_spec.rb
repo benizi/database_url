@@ -44,4 +44,16 @@ describe DatabaseUrl do
       encoding: 'latin1',
     }
   end
+
+  it "should not fail when the URL doesn't have a query string" do
+    ENV['DATABASE_URL'] = "postgres://uuu:xxx@127.0.0.4:1237/abc"
+    DatabaseUrl.active_record_config.should == {
+      adapter: 'postgres',
+      host: '127.0.0.4',
+      port: 1237,
+      database: 'abc',
+      user: 'uuu',
+      password: 'xxx',
+    }
+  end
 end

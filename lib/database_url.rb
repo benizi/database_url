@@ -24,7 +24,7 @@ module DatabaseUrl
       if uri.password
         retval[:password] = uri.password
       end
-      query = CGI.parse uri.query
+      query = uri.query ? CGI.parse(uri.query) : {}
       if query.has_key?('encoding')
         retval[:encoding] = query['encoding'][0]
       end
